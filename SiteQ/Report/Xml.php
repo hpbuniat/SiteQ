@@ -73,11 +73,29 @@ class SiteQ_Report_Xml extends SiteQ_Report_AbstractReport {
         file_put_contents($this->_filename, $this->_document->saveXML());
     }
 
+    /**
+     * Helper to add a child-element
+     *
+     * @param  DOMElement $parent
+     * @param  string $name
+     * @param  mixed $value
+     *
+     * @return void
+     */
     protected function _addChild($parent, $name, $value) {
         $element = $this->_document->createElement($name, htmlspecialchars($value));
         $parent->appendChild($element);
     }
 
+    /**
+     * Helper to add a attribute
+     *
+     * @param  DOMElement $parent
+     * @param  string $name
+     * @param  mixed $value
+     *
+     * @return void
+     */
     protected function _addAttr($parent, $name, $value) {
         $parent->setAttributeNode(new DOMAttr($name, $value));
     }
