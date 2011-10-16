@@ -1,5 +1,54 @@
 <?php
+/**
+ * SiteQ
+ *
+ * Copyright (c) 2011, Hans-Peter Buniat <hpbuniat@googlemail.com>.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ *
+ * * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in
+ * the documentation and/or other materials provided with the
+ * distribution.
+ *
+ * * Neither the name of Hans-Peter Buniat nor the names of his
+ * contributors may be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @package SiteQ
+ * @author Hans-Peter Buniat <hpbuniat@googlemail.com>
+ * @copyright 2011 Hans-Peter Buniat <hpbuniat@googlemail.com>
+ * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ */
 
+/**
+ * Pagespeed Service
+ *
+ * @author Hans-Peter Buniat <hpbuniat@googlemail.com>
+ * @copyright 2011 Hans-Peter Buniat <hpbuniat@googlemail.com>
+ * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @version Release: @package_version@
+ * @link https://github.com/hpbuniat/SiteQ
+ */
 class SiteQ_Service_Pagespeed extends SiteQ_Service_AbstractService {
 
     /**
@@ -21,7 +70,7 @@ class SiteQ_Service_Pagespeed extends SiteQ_Service_AbstractService {
      * @see SiteQ/Service/SiteQ_Service_AbstractService::query()
      */
     public function query() {
-        $sPageSpeed = 'http://pagespeed.googlelabs.com/run_pagespeed?url=' . urlencode($this->_sUrl) . '%2F&format=json';
+        $sPageSpeed = 'https://developers.google.com/_apps/pagespeed/run_pagespeed?url=' . urlencode($this->_sUrl) . '&format=json';
         $rCurl = curl_init();
         curl_setopt($rCurl, CURLOPT_URL, $sPageSpeed);
         curl_setopt($rCurl, CURLOPT_HEADER, 0);
@@ -105,7 +154,7 @@ class SiteQ_Service_Pagespeed extends SiteQ_Service_AbstractService {
      * @return string
      */
     protected function _replaceHelper(array $aMatches) {
-        if (isset($aMatches[1])) {
+        if (isset($aMatches[1]) === true) {
             $iKey = (int) $aMatches[1] - 1;
             return $this->_aReplace[$iKey]['localized_value'];
         }
